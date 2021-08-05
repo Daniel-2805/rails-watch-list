@@ -1,0 +1,16 @@
+<h2>List: <%= @list.name %></h2>
+<br>
+<h3>       Bookmarks</h3>
+<% @list.bookmarks.each do |bookmark| %>
+  <p>  Comment: <%= bookmark.comment %>   movie_id: <%= bookmark.movie_id %> </p>
+  <%= link_to "Borrar", bookmark_path(bookmark),  method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<br>
+<h3>       Input New Bookmark</h3>
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.input :comment %>
+  <%= f.association :movie %>
+  <%= f.submit %>
+  <% end %>
+<br>
+<%= link_to "Return to Home", lists_path %>
